@@ -23,3 +23,36 @@ TEST_USERS = {
         "password": "wrong_password"
     }
 }
+
+SCREENSHOTS_DIR = ROOT_DIR / "screenshots"
+REPORTS_DIR = ROOT_DIR / "reports"
+LOGS_DIR = ROOT_DIR / "Logs"
+
+for dir_path in [SCREENSHOTS_DIR, REPORTS_DIR, LOGS_DIR]:
+    dir_path.mkdir(exist_ok=True)
+
+LOGGING_CONFIG = {
+    "version": 1,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        }
+    },
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": LOGS_DIR / "automation.log",
+            "formatter": "default",
+            "level": "DEBUG"
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "level": "INFO"
+        }
+    },
+    "root": {
+        "handlers": ["file", "console"],
+        "level": "INFO"
+    }
+}
